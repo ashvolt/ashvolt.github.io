@@ -1,0 +1,50 @@
+---
+title: "Spec-Driven Development Is How You Get Value From AI Coding"
+description: "AI-assisted development has been in my production workflow since 2022. The engineers getting 10x from it aren't prompting harder — they're specifying better."
+date: "2026-02-10"
+tags: ["AI-Assisted Development", "Spec-Driven Development", "Engineering Practice"]
+---
+
+I've used AI-assisted development in production since 2022 — first GitHub Copilot on
+enterprise codebases, now agentic tools that write whole modules. The pattern that separates
+teams getting real leverage from teams getting slop is not prompt cleverness. It's whether a
+**spec exists before the code does**.
+
+## Why specs and AI are a natural pair
+
+An LLM is a powerful but literal collaborator: it does exactly what the context implies, and
+fills every gap with a guess. A written spec removes the gaps. When I started my
+[quant trading platform](https://github.com/ashvolt/quant-platform), the first commit wasn't
+code — it was `SYSTEM_DESIGN.md`: module boundaries, data contracts, configuration strategy.
+Every AI-assisted session after that had a source of truth to be checked against.
+
+The workflow that works for me:
+
+1. **Write the contract** — what the module does, its inputs/outputs, its failure modes.
+   Plain markdown, versioned with the code.
+2. **Direct, don't dictate** — give the AI the spec and the relevant code, ask for an
+   implementation, and let it handle the mechanical breadth.
+3. **Verify like a reviewer, not a spectator** — run it, test the edges the spec calls out,
+   and reject anything that satisfies the letter of the prompt but not the contract.
+
+## The spec is the durable artifact
+
+Here's the inversion that took me a while to see: with AI in the loop, **code is becoming
+cheap and specs are becoming the asset**. Code can be regenerated from a good spec in
+minutes. A spec can't be regenerated from code without losing the *why* — the rejected
+alternatives, the constraints, the intent.
+
+This also explains why senior engineers benefit from AI more than juniors, which is the
+opposite of what everyone predicted. The bottleneck was never typing speed; it was knowing
+precisely what to build. Nine years of writing API contracts, reviewing designs, and debugging
+production incidents is exactly the training you need to direct an AI well.
+
+## What I don't delegate
+
+Three things stay human in my workflow: **architecture decisions** (the AI proposes, the spec
+decides), **security-sensitive code paths** (auth, payments — reviewed line by line, always),
+and **the definition of done** (tests the AI writes to satisfy its own code don't count as
+verification).
+
+AI-assisted engineering isn't a junior engineer that never sleeps. It's a force multiplier on
+clarity. If your thinking is vague, it multiplies the vagueness — and ships it.

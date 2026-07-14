@@ -1,0 +1,48 @@
+---
+title: "Micro Frontends at Enterprise Scale: What Actually Matters"
+description: "Lessons from building a log intelligence micro frontend serving ~1,200 concurrent users at Dell — where the architecture decisions that mattered weren't the ones in the conference talks."
+date: "2026-04-20"
+tags: ["Micro Frontends", "Angular", "Architecture", "Enterprise"]
+---
+
+I spent the last few years building micro frontends for enterprise platforms — including a log
+intelligence MFE where cross-functional teams visualise and act on operational logs in real
+time. Here's what mattered in production, as opposed to what gets discussed in talks.
+
+## Configuration beats code
+
+The single highest-leverage decision: making log-source onboarding **entirely
+configuration-driven**. New sources required zero code changes — a config entry defined the
+views, filters, and role-based access. That one property cut setup time by 60%, roughly 20–25
+hours per month across teams.
+
+The general rule: in an enterprise MFE, the teams consuming your platform outnumber the team
+building it. Every workflow that requires *your* code changes becomes *their* bottleneck.
+Design the extension points first.
+
+## The gateway is part of the frontend architecture
+
+Micro frontends get discussed as a purely client-side pattern, but the security model lives at
+the edge. We enforced cookie/SSO auth and role-based access centrally through an Ocelot API
+gateway — every service inherited the same security posture, and no MFE could accidentally
+opt out. Auth done per-microfrontend is how you end up on a security incident review.
+
+## Real-time is a data-modeling problem
+
+SignalR pushing log streams to ~1,200 concurrent users taught me that real-time UI is
+constrained by *what* you send, not *how often*. Sending deltas instead of snapshots, and
+letting role-based view configs filter server-side, kept both bandwidth and render time sane —
+part of how we cut initial render by 35% while adding features.
+
+## Observability standards outlive components
+
+The most durable thing we shipped wasn't a component — it was a **logging standard** with
+reusable data-view components on top. Three engineering teams adopted it, and cross-team
+troubleshooting dropped by 6–8 hours a week. Code gets rewritten; conventions compound.
+
+## The honest trade-off
+
+Micro frontends bought us independent deployability and team autonomy, and cost us build
+tooling complexity and version-drift vigilance. That trade is worth it at
+multiple-teams-one-platform scale — and rarely before. If one team owns the whole frontend,
+you don't have a micro frontend problem; you have a modular monolith opportunity.
