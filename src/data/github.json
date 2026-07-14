@@ -1,0 +1,51 @@
+{
+  "fetchedAt": null,
+  "user": {
+    "login": "ashvolt",
+    "name": "Pragash Mouttoucoumarassamy",
+    "followers": 0,
+    "publicRepos": 13
+  },
+  "languages": [
+    { "name": "TypeScript", "percent": 42 },
+    { "name": "Python", "percent": 22 },
+    { "name": "JavaScript", "percent": 18 },
+    { "name": "HTML", "percent": 8 },
+    { "name": "q", "percent": 5 },
+    { "name": "SCSS", "percent": 5 }
+  ],
+  "repos": [
+    {
+      "name": "UnderstandingAI",
+      "description": "RAG, vector embeddings, AI agents and tool calling with a local LLM",
+      "language": "Python",
+      "stars": 0,
+      "url": "https://github.com/ashvolt/UnderstandingAI",
+      "updatedAt": null
+    },
+    {
+      "name": "quant-platform",
+      "description": "Quantitative trading platform — spec-driven, Python",
+      "language": "Python",
+      "stars": 0,
+      "url": "https://github.com/ashvolt/quant-platform",
+      "updatedAt": null
+    },
+    {
+      "name": "ats-resume-optimizer",
+      "description": "Client-side ATS resume scoring and keyword-gap analysis",
+      "language": "JavaScript",
+      "stars": 0,
+      "url": "https://github.com/ashvolt/ats-resume-optimizer",
+      "updatedAt": null
+    },
+    {
+      "name": "stock-analyzer",
+      "description": "Time-series stock analysis with kdb+/q",
+      "language": "q",
+      "stars": 0,
+      "url": "https://github.com/ashvolt/stock-analyzer",
+      "updatedAt": null
+    }
+  ]
+}

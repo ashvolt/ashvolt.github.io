@@ -1,0 +1,60 @@
+---
+title: "Building a RAG Agent From First Principles (No Frameworks)"
+description: "What I learned building a retrieval-augmented agent with ChromaDB, Sentence Transformers, and a local llama3 — without LangChain hiding the interesting parts."
+date: "2026-06-15"
+tags: ["AI", "RAG", "Agents", "Python"]
+---
+
+Most RAG tutorials start with `pip install langchain` and end with you understanding nothing.
+When I built [UnderstandingAI](https://github.com/ashvolt/UnderstandingAI), I set one rule:
+every layer gets built explicitly, so I can explain exactly what happens between a user's
+question and the model's answer.
+
+## The pipeline, layer by layer
+
+A RAG system is four honest components:
+
+1. **Ingestion** — PDFs are parsed and split into chunks. Chunking strategy matters more than
+   any other single decision: too large and retrieval gets noisy, too small and you lose the
+   context that makes an answer coherent.
+2. **Embedding** — each chunk goes through a Sentence Transformer and becomes a vector.
+   This is where "semantic search" stops being magic: similar meanings land near each other
+   in vector space, and that's the entire trick.
+3. **Retrieval** — the user's question is embedded the same way, and ChromaDB returns the
+   nearest chunks. Cosine similarity, nothing more exotic.
+4. **Generation** — the retrieved chunks are packed into the prompt, and a local llama3
+   (via Ollama) answers *grounded in that context* instead of hallucinating from weights.
+
+## Then make it an agent
+
+The step from RAG to *agent* is a loop, not a library:
+
+```python
+while True:
+    context = retrieve(user_input)          # semantic search
+    response = llm(prompt(context, input))  # grounded generation
+    if needs_tool(response):                # model asked for a tool?
+        result = execute_tool(response)     # run it
+        input = result                      # feed the result back
+    else:
+        return response                     # done
+```
+
+The model decides whether it needs a tool, the runtime executes it, and the result feeds back
+into the next iteration. Every agent framework you've heard of is an elaboration of this loop
+— with better parsing, retries, and guardrails. Build the loop once yourself and every
+framework's documentation suddenly makes sense.
+
+## What surprised me
+
+**Retrieval quality is the product.** The LLM was almost never the problem; garbage retrieval
+was. Time spent on chunking and embedding choices pays off 10x more than prompt tweaking.
+
+**Local models change the economics.** llama3 on Ollama costs nothing per token, keeps data
+private, and is more than good enough for retrieval-grounded answers. For internal tools,
+"local-first" deserves to be the default question, not the afterthought.
+
+**Nine years of API design transfer directly.** An agent's tools are an API surface: they need
+clear contracts, defensive validation, and predictable failure modes. The engineering
+discipline is the same one that keeps microservices honest — which is why I think production
+AI engineering belongs to people who've shipped production systems.
