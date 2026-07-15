@@ -9,8 +9,8 @@ import { ScrollProgress } from "@/components/scroll-progress";
 export const metadata: Metadata = {
   metadataBase: new URL(profile.siteUrl),
   title: {
-    default: `${profile.name} — ${profile.headline}`,
-    template: `%s — ${profile.name}`,
+    default: `Portfolio of ${profile.fullName} — ${profile.headline}`,
+    template: `%s — ${profile.fullName}`,
   },
   description: profile.summary,
   keywords: [
@@ -30,19 +30,20 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     url: profile.siteUrl,
-    siteName: `${profile.name} — Portfolio`,
-    title: `${profile.name} — ${profile.headline}`,
+    siteName: `Portfolio of ${profile.fullName}`,
+    title: `Portfolio of ${profile.fullName} — ${profile.headline}`,
     description: profile.summary,
-    images: [{ url: "/og.png", width: 1200, height: 630, alt: `${profile.name} — ${profile.headline}` }],
+    images: [{ url: "/og.png", width: 1200, height: 630, alt: `${profile.fullName} — ${profile.headline}` }],
   },
   twitter: {
     card: "summary_large_image",
-    title: `${profile.name} — ${profile.headline}`,
+    title: `Portfolio of ${profile.fullName} — ${profile.headline}`,
     description: profile.summary,
     images: ["/og.png"],
   },
   icons: {
-    icon: [{ url: "/favicon.svg", type: "image/svg+xml" }],
+    icon: [{ url: "/favicon.png", type: "image/png", sizes: "96x96" }],
+    apple: [{ url: "/apple-icon.png", sizes: "180x180" }],
   },
   alternates: {
     types: { "application/rss+xml": "/feed.xml" },

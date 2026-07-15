@@ -7,7 +7,7 @@ import { SectionReveal } from "@/components/section-reveal";
 export const metadata: Metadata = {
   title: "About",
   description:
-    "The story of Pragash M — from enterprise SaaS engineering in Puducherry to building AI-powered products with LLMs and agents.",
+    "The story of Pragash Mouttoucoumarassamy — from enterprise SaaS engineering in Puducherry to building AI-powered products with LLMs and agents.",
   alternates: { canonical: "/about/" },
 };
 
@@ -33,6 +33,16 @@ const principles = [
 export default function AboutPage() {
   return (
     <div className="mx-auto max-w-3xl px-4 py-16 sm:px-6">
+      <SectionReveal>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/avatar.jpg"
+          alt="Portrait of Pragash Mouttoucoumarassamy"
+          width={112}
+          height={112}
+          className="mb-8 h-28 w-28 rounded-2xl ring-2 ring-accent-500/40"
+        />
+      </SectionReveal>
       <PageHeader
         eyebrow="About"
         title="Nine years of shipping. Now building what's next."

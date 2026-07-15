@@ -38,6 +38,9 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Refresh GitHub avatar
+        run: curl -fsSL -o public/avatar.jpg "https://avatars.githubusercontent.com/u/25412937?v=4" || echo "avatar refresh failed — using committed copy"
+
       - name: Build static site
         run: npm run build && npm run postbuild
 

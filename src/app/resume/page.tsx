@@ -9,7 +9,7 @@ import { skillCategories } from "@/data/skills";
 export const metadata: Metadata = {
   title: "Resume",
   description:
-    "Resume of Pragash M — Senior Full-Stack Engineer with 9+ years across TypeScript, React, Angular, Node.js, .NET Core, and AI engineering.",
+    "Resume of Pragash Mouttoucoumarassamy — Senior Full-Stack Engineer with 9+ years across TypeScript, React, Angular, Node.js, .NET Core, and AI engineering.",
   alternates: { canonical: "/resume/" },
 };
 
@@ -18,7 +18,7 @@ export default function ResumePage() {
     <div className="mx-auto max-w-3xl px-4 py-16 sm:px-6">
       <PageHeader
         eyebrow="Resume"
-        title="Pragash M"
+        title="Pragash Mouttoucoumarassamy"
         lead="Full-Stack Software Engineer · 9+ years · TypeScript, React, Angular, Node.js, .NET Core, and applied AI."
       />
 

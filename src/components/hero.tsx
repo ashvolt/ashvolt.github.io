@@ -11,13 +11,20 @@ export function Hero() {
     <section className="relative overflow-hidden">
       <div aria-hidden className="bg-grid absolute inset-0" />
       <div className="relative mx-auto max-w-6xl px-4 pb-20 pt-24 sm:px-6 sm:pt-32">
-        <p
-          className="animate-fade-up mb-4 inline-flex items-center gap-2 rounded-full border bg-card px-3 py-1 font-mono text-xs text-muted"
-          style={stagger(0)}
-        >
-          <span aria-hidden className="h-1.5 w-1.5 animate-pulse rounded-full bg-emerald-500" />
-          Available for remote &amp; AI engineering roles
-        </p>
+        <div className="animate-fade-up mb-6 flex items-center gap-4" style={stagger(0)}>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={profile.avatar}
+            alt={`Portrait of ${profile.fullName}`}
+            width={72}
+            height={72}
+            className="h-16 w-16 rounded-full ring-2 ring-accent-500/50 sm:h-[72px] sm:w-[72px]"
+          />
+          <p className="inline-flex items-center gap-2 rounded-full border bg-card px-3 py-1 font-mono text-xs text-muted">
+            <span aria-hidden className="h-1.5 w-1.5 animate-pulse rounded-full bg-emerald-500" />
+            Available for remote &amp; AI engineering roles
+          </p>
+        </div>
 
         <h1
           className="animate-fade-up max-w-3xl text-4xl font-bold leading-tight tracking-tight sm:text-6xl"

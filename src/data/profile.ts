@@ -1,7 +1,9 @@
 export const profile = {
-  name: "Pragash M",
+  name: "Pragash Mouttoucoumarassamy",
   fullName: "Pragash Mouttoucoumarassamy",
+  shortName: "Pragash",
   username: "ashvolt",
+  avatar: "/avatar.jpg",
   headline: "Senior Software Engineer",
   tagline:
     "Building AI-powered products with full-stack engineering, LLMs, agents, and modern web technologies.",
