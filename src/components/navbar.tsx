@@ -48,10 +48,19 @@ export function Navbar() {
       >
         <Link
           href="/"
-          className="font-mono text-sm font-semibold tracking-tight text-foreground hover:text-accent-500 transition-colors"
-          aria-label="Pragash M — home"
+          className="flex min-w-0 items-center gap-2.5 text-sm font-semibold tracking-tight text-foreground transition-colors hover:text-accent-500"
+          aria-label="Pragash Mouttoucoumarassamy — home"
         >
-          <span className="text-accent-500">~/</span>ashvolt
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/avatar.jpg"
+            alt=""
+            width={28}
+            height={28}
+            className="h-7 w-7 shrink-0 rounded-full ring-1 ring-accent-500/40"
+          />
+          <span className="hidden xl:inline">Pragash Mouttoucoumarassamy</span>
+          <span className="xl:hidden">Pragash</span>
         </Link>
 
         <div className="hidden items-center gap-1 lg:flex">

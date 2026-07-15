@@ -7,7 +7,7 @@ import { profile } from "@/data/profile";
 export const metadata: Metadata = {
   title: "Contact",
   description:
-    "Get in touch with Pragash M — open to remote, UAE, and AI engineering roles.",
+    "Get in touch with Pragash Mouttoucoumarassamy — open to remote, UAE, and AI engineering roles.",
   alternates: { canonical: "/contact/" },
 };
 

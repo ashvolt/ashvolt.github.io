@@ -13,7 +13,7 @@ const blogDir = join(root, "src", "content", "blog");
 const outDir = join(root, "out");
 
 const SITE = "https://ashvolt.github.io";
-const AUTHOR = "Pragash M";
+const AUTHOR = "Pragash Mouttoucoumarassamy";
 
 if (!existsSync(outDir)) {
   console.error("out/ not found — run `next build` first");

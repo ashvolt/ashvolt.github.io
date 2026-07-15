@@ -6,7 +6,7 @@ import { SectionReveal } from "@/components/section-reveal";
 export const metadata: Metadata = {
   title: "Now",
   description:
-    "What Pragash M is learning, building, and aiming for right now — updated as it changes.",
+    "What Pragash Mouttoucoumarassamy is learning, building, and aiming for right now — updated as it changes.",
   alternates: { canonical: "/now/" },
 };
 
