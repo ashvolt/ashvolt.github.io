@@ -3,10 +3,11 @@ import data from "./projects.json";
 /**
  * Project cards are generated at build time by scripts/fetch-github.mjs from
  * the GitHub API — which repos appear (and how) is controlled entirely by
- * GitHub topics on each repo:
+ * GitHub topics on each repo. Any one of these lists the repo on /projects;
+ * the narrower two add placements on top:
  *
- *   portfolio          — repo appears on /projects
- *   portfolio-featured — also featured on the home page
+ *   portfolio          — listed on /projects
+ *   portfolio-featured — also featured on the home page, listed first
  *   ai-lab             — also listed on /ai-lab
  *
  * projects.json is a committed snapshot refreshed on every deploy (daily cron

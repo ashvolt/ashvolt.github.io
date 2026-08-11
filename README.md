@@ -59,8 +59,15 @@ appear is controlled by **GitHub topics** on each repo (*repo page → About ⚙
 | Topic | Effect |
 |---|---|
 | `portfolio` | Repo appears on the projects page |
-| `portfolio-featured` | Also featured on the home page and listed first |
-| `ai-lab` | Also listed on the AI Lab page |
+| `portfolio-featured` | Featured on the home page, listed first — *and* on the projects page |
+| `ai-lab` | Listed on the AI Lab page — *and* on the projects page |
+
+Any one of these is enough to list a repo, so the narrower topics work on their
+own: `portfolio-featured` alone still shows the repo everywhere a featured
+project belongs. A repo carrying none of them never appears anywhere on the
+site — the "Live from GitHub" language bar and repository list are built from
+the same tagged set, so untagged repos (the site repo, the profile README,
+old practice repos) stay off the page entirely.
 
 Everything on the card comes from GitHub: the repo **description**, remaining topics
 (rendered as badges), primary language, stars, last-push date, and the repo's
