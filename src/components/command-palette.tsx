@@ -31,10 +31,10 @@ const pages: Item[] = [
 
 const projectItems: Item[] = projects.map((p) => ({
   title: p.name,
-  hint: p.category,
-  href: p.repo,
-  external: true,
-  keywords: `${p.tagline} ${p.tech.join(" ")}`,
+  hint: p.language ?? "Project",
+  href: p.url ?? "/projects",
+  external: Boolean(p.url),
+  keywords: `${p.description} ${p.topics.join(" ")}`,
   icon: <FolderGit2 className={iconCls} aria-hidden />,
 }));
 

@@ -15,24 +15,16 @@ export const metadata: Metadata = {
 };
 
 export default function ProjectsPage() {
-  const featured = projects.filter((p) => p.featured);
-  const rest = projects.filter((p) => !p.featured);
-
   return (
     <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
       <PageHeader
         eyebrow="Projects"
         title="Things I've built"
-        lead="Open-source experiments and production systems. Featured projects first — each with the problem it solves and how it's architected."
+        lead="Synced automatically from my GitHub profile — featured projects first, including private work shown without a repo link."
       />
 
       <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-        {featured.map((p, i) => (
-          <SectionReveal key={p.slug} delay={i * 0.06}>
-            <ProjectCard project={p} detailed />
-          </SectionReveal>
-        ))}
-        {rest.map((p, i) => (
+        {projects.map((p, i) => (
           <SectionReveal key={p.slug} delay={i * 0.06}>
             <ProjectCard project={p} />
           </SectionReveal>

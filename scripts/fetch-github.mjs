@@ -4,7 +4,14 @@
  * committed snapshots are kept, so the build never breaks on network issues.
  *
  * Env:
- *   GITHUB_TOKEN — optional; raises GitHub API rate limits (auto-provided in Actions).
+ *   GITHUB_TOKEN    — optional; raises GitHub API rate limits (auto-provided in Actions).
+ *   PORTFOLIO_TOKEN — optional fine-grained PAT (Metadata: read on all repos); when set,
+ *                     private repos are included in the projects listing.
+ *
+ * Project cards (src/data/projects.json) are driven by GitHub topics:
+ *   portfolio          — repo appears on the projects page
+ *   portfolio-featured — also featured on the home page
+ *   ai-lab             — also listed on /ai-lab
  */
 import { writeFileSync, readFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
@@ -16,9 +23,12 @@ const dataDir = join(__dirname, "..", "src", "data");
 const GITHUB_USER = "ashvolt";
 const CREDLY_USER = "pragash-mouttoucoumarassamy";
 
+const PORTFOLIO_TOKEN = process.env.PORTFOLIO_TOKEN || "";
+const AUTH_TOKEN = PORTFOLIO_TOKEN || process.env.GITHUB_TOKEN || "";
+
 const headers = { "User-Agent": `${GITHUB_USER}-portfolio-build` };
-if (process.env.GITHUB_TOKEN) {
-  headers.Authorization = `Bearer ${process.env.GITHUB_TOKEN}`;
+if (AUTH_TOKEN) {
+  headers.Authorization = `Bearer ${AUTH_TOKEN}`;
 }
 
 async function getJson(url, extraHeaders = {}) {
@@ -27,18 +37,67 @@ async function getJson(url, extraHeaders = {}) {
   return res.json();
 }
 
+async function listRepos() {
+  // With a PAT that can see private repos, /user/repos returns them; the
+  // public endpoint is the fallback so the script still works tokenless.
+  const url = PORTFOLIO_TOKEN
+    ? `https://api.github.com/user/repos?per_page=100&affiliation=owner&sort=updated`
+    : `https://api.github.com/users/${GITHUB_USER}/repos?per_page=100&sort=updated`;
+  const repos = await getJson(url);
+  return repos.filter((r) => !r.fork);
+}
+
+const CURATION_TOPICS = new Set(["portfolio", "portfolio-featured", "ai-lab"]);
+
+function buildProjects(own) {
+  const tagged = own.filter((r) => (r.topics || []).includes("portfolio"));
+  if (tagged.length === 0) {
+    // Topics not set up (or API omitted them) — keep the committed snapshot
+    // rather than shipping an empty projects page.
+    console.warn("⚠ projects.json: no repos tagged 'portfolio'; keeping committed snapshot");
+    return;
+  }
+
+  const projects = tagged
+    .map((r) => ({
+      slug: r.name.toLowerCase(),
+      name: r.name,
+      description: r.description || "",
+      language: r.language,
+      topics: (r.topics || []).filter((t) => !CURATION_TOPICS.has(t)).slice(0, 8),
+      stars: r.stargazers_count,
+      url: r.private ? null : r.html_url,
+      homepage: r.homepage || null,
+      private: Boolean(r.private),
+      featured: (r.topics || []).includes("portfolio-featured"),
+      aiLab: (r.topics || []).includes("ai-lab"),
+      pushedAt: r.pushed_at,
+    }))
+    .sort((a, b) => Number(b.featured) - Number(a.featured) || (b.pushedAt > a.pushedAt ? 1 : -1));
+
+  const data = { fetchedAt: new Date().toISOString(), projects };
+  writeFileSync(join(dataDir, "projects.json"), JSON.stringify(data, null, 2) + "\n");
+  console.log(
+    `✓ projects.json — ${projects.length} projects (${projects.filter((p) => p.featured).length} featured, ${projects.filter((p) => p.private).length} private)`
+  );
+}
+
 async function fetchGitHub() {
-  const [user, repos] = await Promise.all([
+  const [user, own] = await Promise.all([
     getJson(`https://api.github.com/users/${GITHUB_USER}`),
-    getJson(`https://api.github.com/users/${GITHUB_USER}/repos?per_page=100&sort=updated`),
+    listRepos(),
   ]);
 
-  const own = repos.filter((r) => !r.fork);
+  buildProjects(own);
+
+  // Everything below feeds the public "Live from GitHub" section — private
+  // repos are excluded since their links would 404 for visitors.
+  const pub = own.filter((r) => !r.private);
 
   // Aggregate language share by repo size
   const langBytes = {};
   await Promise.all(
-    own.map(async (r) => {
+    pub.map(async (r) => {
       try {
         const langs = await getJson(r.languages_url);
         for (const [lang, bytes] of Object.entries(langs)) {
@@ -65,7 +124,7 @@ async function fetchGitHub() {
       publicRepos: user.public_repos,
     },
     languages,
-    repos: own
+    repos: pub
       .sort((a, b) => b.stargazers_count - a.stargazers_count || (b.pushed_at > a.pushed_at ? 1 : -1))
       .slice(0, 12)
       .map((r) => ({
@@ -119,5 +178,8 @@ function keepSnapshot(file, err) {
 }
 
 const results = await Promise.allSettled([fetchGitHub(), fetchCredly()]);
-if (results[0].status === "rejected") keepSnapshot("github.json", results[0].reason);
+if (results[0].status === "rejected") {
+  keepSnapshot("github.json", results[0].reason);
+  keepSnapshot("projects.json", results[0].reason);
+}
 if (results[1].status === "rejected") keepSnapshot("credly.json", results[1].reason);

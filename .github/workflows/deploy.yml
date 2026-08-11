@@ -4,8 +4,11 @@ on:
   push:
     branches: [main]
   schedule:
-    # Weekly rebuild (Mondays 03:00 UTC) to refresh GitHub + Credly data
-    - cron: "0 3 * * 1"
+    # Daily rebuild (03:00 UTC) to refresh GitHub projects + Credly data
+    - cron: "0 3 * * *"
+  repository_dispatch:
+    # Fired by project repos' notify-portfolio workflow on push (see docs/notify-portfolio.yml)
+    types: [project-updated]
   workflow_dispatch:
 
 permissions:
@@ -37,6 +40,9 @@ jobs:
         run: npm run fetch-data
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # Fine-grained PAT (Metadata: read-only, all repos) so private repos
+          # appear as project cards. Optional — without it, public repos only.
+          PORTFOLIO_TOKEN: ${{ secrets.PORTFOLIO_TOKEN }}
 
       - name: Refresh GitHub avatar
         run: curl -fsSL -o public/avatar.jpg "https://avatars.githubusercontent.com/u/25412937?v=4" || echo "avatar refresh failed — using committed copy"

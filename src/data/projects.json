@@ -1,0 +1,159 @@
+{
+  "fetchedAt": null,
+  "projects": [
+    {
+      "slug": "ats-resume-optimizer",
+      "name": "ats-resume-optimizer",
+      "description": "Client-side ATS resume scoring and keyword-gap analysis against any job description — free, private, no signup, everything runs in the browser.",
+      "language": "JavaScript",
+      "topics": [
+        "react",
+        "vite",
+        "nlp",
+        "resume"
+      ],
+      "stars": 0,
+      "url": "https://github.com/ashvolt/ats-resume-optimizer",
+      "homepage": null,
+      "private": false,
+      "featured": true,
+      "aiLab": true,
+      "pushedAt": "2026-07-18T16:23:16Z"
+    },
+    {
+      "slug": "webjson",
+      "name": "webjson",
+      "description": "Any webpage as a JSON document — structure, styles, state, and events. All edits are JSON Patch operations rendered live through framework adapters (React first).",
+      "language": "TypeScript",
+      "topics": [
+        "json-patch",
+        "json-schema",
+        "react",
+        "spec",
+        "ui-runtime"
+      ],
+      "stars": 0,
+      "url": null,
+      "homepage": null,
+      "private": true,
+      "featured": true,
+      "aiLab": true,
+      "pushedAt": "2026-07-09T11:47:38Z"
+    },
+    {
+      "slug": "quantedge",
+      "name": "quantedge",
+      "description": "Institutional-grade quant research and trading platform — kdb+ tick storage, Kafka ingestion, walk-forward backtesting, and an adaptive DQN agent with online learning.",
+      "language": "Python",
+      "topics": [
+        "kdb",
+        "kafka",
+        "backtesting",
+        "reinforcement-learning",
+        "trading"
+      ],
+      "stars": 0,
+      "url": null,
+      "homepage": null,
+      "private": true,
+      "featured": true,
+      "aiLab": true,
+      "pushedAt": "2026-07-04T10:22:55Z"
+    },
+    {
+      "slug": "understandingai",
+      "name": "UnderstandingAI",
+      "description": "RAG pipeline and AI agent with tool calling, built from first principles — vector embeddings, semantic search, and an agentic reasoning loop on a local LLM (Ollama / llama3).",
+      "language": "Python",
+      "topics": [
+        "rag",
+        "ai-agents",
+        "chromadb",
+        "ollama",
+        "llm"
+      ],
+      "stars": 0,
+      "url": "https://github.com/ashvolt/UnderstandingAI",
+      "homepage": null,
+      "private": false,
+      "featured": true,
+      "aiLab": true,
+      "pushedAt": "2026-02-17T14:07:06Z"
+    },
+    {
+      "slug": "airbnb-clone",
+      "name": "airbnb-clone",
+      "description": "Pixel-perfect clone of a real Airbnb listing page (React 18 + Vite) plus a production-scale system design — nine architecture diagrams covering auth, booking saga, and payment flows.",
+      "language": "JavaScript",
+      "topics": [
+        "react",
+        "vite",
+        "system-design",
+        "c4-diagrams",
+        "accessibility"
+      ],
+      "stars": 0,
+      "url": null,
+      "homepage": "https://airbnb-clone-umber-two.vercel.app",
+      "private": true,
+      "featured": false,
+      "aiLab": false,
+      "pushedAt": "2026-07-08T08:03:02Z"
+    },
+    {
+      "slug": "quant-platform",
+      "name": "quant-platform",
+      "description": "Quantitative trading platform built spec-first — system design written before code, with modular configuration management and market-data ingestion pipelines.",
+      "language": "Python",
+      "topics": [
+        "data-pipelines",
+        "system-design",
+        "spec-driven"
+      ],
+      "stars": 0,
+      "url": "https://github.com/ashvolt/quant-platform",
+      "homepage": null,
+      "private": false,
+      "featured": false,
+      "aiLab": true,
+      "pushedAt": "2026-03-02T16:48:37Z"
+    },
+    {
+      "slug": "stock-analyzer",
+      "name": "stock-analyzer",
+      "description": "Time-series stock analysis in kdb+/q — CSV tick data loaded into kdb+ tables with moving averages, per-symbol price ranges, and volume aggregation in idiomatic q.",
+      "language": "q",
+      "topics": [
+        "kdb",
+        "time-series",
+        "financial-data"
+      ],
+      "stars": 0,
+      "url": "https://github.com/ashvolt/stock-analyzer",
+      "homepage": null,
+      "private": false,
+      "featured": false,
+      "aiLab": true,
+      "pushedAt": "2025-09-19T15:14:55Z"
+    },
+    {
+      "slug": "taskmanager",
+      "name": "taskManager",
+      "description": "Full-stack task management app deployed to production — Angular frontend, Node.js/Express backend, Firestore persistence, and Firebase authentication.",
+      "language": "TypeScript",
+      "topics": [
+        "angular",
+        "nodejs",
+        "express",
+        "firebase"
+      ],
+      "stars": 0,
+      "url": "https://github.com/ashvolt/taskManager",
+      "homepage": "https://taskmanager-ux.onrender.com",
+      "private": false,
+      "featured": false,
+      "aiLab": false,
+      "pushedAt": "2024-04-22T18:58:10Z"
+    }
+  ]
+}

@@ -1,18 +1,7 @@
 import { ArrowUpRight, Star } from "lucide-react";
 import githubData from "@/data/github.json";
 import { profile } from "@/data/profile";
-
-const langColors: Record<string, string> = {
-  TypeScript: "#3178c6",
-  JavaScript: "#f1e05a",
-  Python: "#3572A5",
-  HTML: "#e34c26",
-  CSS: "#563d7c",
-  SCSS: "#c6538c",
-  q: "#0040cd",
-  "C#": "#178600",
-  Java: "#b07219",
-};
+import { langColors, fallbackLangColor } from "@/lib/lang-colors";
 
 export function GitHubStats() {
   const { languages, repos, fetchedAt } = githubData;
@@ -31,7 +20,7 @@ export function GitHubStats() {
           {languages.map((l) => (
             <div
               key={l.name}
-              style={{ width: `${l.percent}%`, background: langColors[l.name] ?? "#8b8b95" }}
+              style={{ width: `${l.percent}%`, background: langColors[l.name] ?? fallbackLangColor }}
               title={`${l.name} ${l.percent}%`}
             />
           ))}
@@ -42,7 +31,7 @@ export function GitHubStats() {
               <span
                 aria-hidden
                 className="h-2 w-2 rounded-full"
-                style={{ background: langColors[l.name] ?? "#8b8b95" }}
+                style={{ background: langColors[l.name] ?? fallbackLangColor }}
               />
               {l.name} {l.percent}%
             </span>
@@ -81,7 +70,7 @@ export function GitHubStats() {
                       <span
                         aria-hidden
                         className="h-2 w-2 rounded-full"
-                        style={{ background: langColors[r.language] ?? "#8b8b95" }}
+                        style={{ background: langColors[r.language] ?? fallbackLangColor }}
                       />
                       {r.language}
                     </span>

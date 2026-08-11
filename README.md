@@ -27,7 +27,8 @@ src/
 ├── data/                 # ← ALL site content lives here
 │   ├── profile.ts        # Name, headline, links, availability, stats
 │   ├── experience.ts     # Jobs + education
-│   ├── projects.ts       # Project cards (curated metadata)
+│   ├── projects.ts       # Types + workProjects; cards come from projects.json
+│   ├── projects.json     # Auto-generated project cards (GitHub topics — see below)
 │   ├── skills.ts         # Skill categories + proficiency
 │   ├── github.json       # Auto-refreshed snapshot (GitHub API)
 │   └── credly.json       # Auto-refreshed snapshot (Credly badges)
@@ -38,8 +39,8 @@ scripts/
 
 ## How deployment works
 
-1. Push to `main` (or the weekly Monday cron, or manual dispatch) triggers
-   `.github/workflows/deploy.yml`.
+1. Push to `main`, the **daily 03:00 UTC cron**, a `repository_dispatch` from a project
+   repo, or manual dispatch triggers `.github/workflows/deploy.yml`.
 2. The workflow fetches **live GitHub repos/languages** and **Credly badges**, writing them
    into `src/data/*.json`. If either API is unreachable the committed snapshots are used —
    the build never fails on network issues.
@@ -49,13 +50,42 @@ scripts/
 **One-time setup:** in the repo go to *Settings → Pages → Build and deployment → Source* and
 select **GitHub Actions**.
 
+## Project cards sync from GitHub — no code edits needed
+
+The cards on `/projects`, the home page, and `/ai-lab` are generated from the GitHub API
+at every deploy (`scripts/fetch-github.mjs` → `src/data/projects.json`). Which repos
+appear is controlled by **GitHub topics** on each repo (*repo page → About ⚙ → Topics*):
+
+| Topic | Effect |
+|---|---|
+| `portfolio` | Repo appears on the projects page |
+| `portfolio-featured` | Also featured on the home page and listed first |
+| `ai-lab` | Also listed on the AI Lab page |
+
+Everything on the card comes from GitHub: the repo **description**, remaining topics
+(rendered as badges), primary language, stars, last-push date, and the repo's
+**Website** field (rendered as a "Live demo" link). Private repos are included when
+`PORTFOLIO_TOKEN` is configured and render with a "Private" lock instead of a repo link.
+
+To show a new project: add the `portfolio` topic and write a good repo description. To
+hide one: remove the topic. The site catches up on the next deploy (nightly at the
+latest). If the topic query ever returns nothing (e.g. topics not set up), the committed
+`projects.json` snapshot keeps rendering — the site never goes blank.
+
+### Instant rebuilds on push (optional)
+
+Copy [`docs/notify-portfolio.yml`](docs/notify-portfolio.yml) into a project repo as
+`.github/workflows/notify-portfolio.yml` and add a `PORTFOLIO_DISPATCH_TOKEN` secret
+(fine-grained PAT scoped to this repo, *Contents: Read and write*). Every push to that
+repo then triggers a site rebuild within minutes instead of waiting for the nightly cron.
+
 ### Environment variables
 
 | Variable | Where | Purpose |
 |---|---|---|
 | `GITHUB_TOKEN` | Provided automatically by GitHub Actions | Raises GitHub API rate limits for the data fetch. No setup needed. |
-
-No other secrets or env vars are required.
+| `PORTFOLIO_TOKEN` | Actions secret in this repo (optional) | Fine-grained PAT, **all repos, Metadata: read-only** — lets the fetch see private repos so they appear as cards. Without it, public repos only. |
+| `PORTFOLIO_DISPATCH_TOKEN` | Actions secret in each *project* repo (optional) | Fine-grained PAT scoped to this repo, **Contents: read/write** — lets project repos trigger instant rebuilds via `repository_dispatch`. |
 
 ## Local development
 
@@ -70,7 +100,8 @@ npm run fetch-data   # refresh github.json / credly.json (optional)
 
 - **Facts about you** (name, links, availability, stats): `src/data/profile.ts`
 - **Jobs / education**: `src/data/experience.ts`
-- **Projects** (cards, AI Lab membership, featured flag): `src/data/projects.ts`
+- **Projects**: managed entirely with GitHub topics (see above); proprietary work
+  projects (no repo) live in `workProjects` in `src/data/projects.ts`
 - **Skills + proficiency levels**: `src/data/skills.ts`
 - **Blog**: add `src/content/blog/my-post.mdx` with `title`, `description`, `date`, `tags`
   frontmatter — the listing, RSS feed, and sitemap pick it up automatically
