@@ -4,7 +4,8 @@
 #
 # Requires a repo secret PORTFOLIO_DISPATCH_TOKEN: a fine-grained PAT scoped to
 # ashvolt/ashvolt.github.io with Contents: Read and write (repository_dispatch
-# needs write access on the target repo).
+# needs write access on the target repo). Until that secret exists the job is a
+# no-op, so adding this file early is harmless.
 name: Notify portfolio
 
 on:
@@ -16,9 +17,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Trigger portfolio rebuild
+        env:
+          TOKEN: ${{ secrets.PORTFOLIO_DISPATCH_TOKEN }}
         run: |
+          if [ -z "$TOKEN" ]; then
+            echo "PORTFOLIO_DISPATCH_TOKEN not set — skipping. The portfolio still"
+            echo "refreshes on its nightly schedule."
+            exit 0
+          fi
           curl -fsS -X POST \
-            -H "Authorization: Bearer ${{ secrets.PORTFOLIO_DISPATCH_TOKEN }}" \
+            -H "Authorization: Bearer $TOKEN" \
             -H "Accept: application/vnd.github+json" \
             https://api.github.com/repos/ashvolt/ashvolt.github.io/dispatches \
             -d '{"event_type":"project-updated"}'
