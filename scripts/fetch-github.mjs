@@ -13,7 +13,8 @@
  *   portfolio          — listed on the projects page
  *   portfolio-featured — also featured on the home page, listed first
  *   ai-lab             — also listed on /ai-lab
- * A repo with none of them never appears.
+ * A repo with none of them never appears anywhere on the site — the
+ * "Live from GitHub" stats in github.json are scoped to the tagged set too.
  */
 import { writeFileSync, readFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
@@ -51,20 +52,7 @@ async function listRepos() {
 
 const CURATION_TOPICS = new Set(["portfolio", "portfolio-featured", "ai-lab"]);
 
-function buildProjects(own) {
-  // Any curation topic is enough to list a repo, so tagging one of the
-  // narrower topics on its own still works: portfolio-featured implies
-  // featured, ai-lab implies the AI Lab listing, and both imply portfolio.
-  const tagged = own.filter((r) => (r.topics || []).some((t) => CURATION_TOPICS.has(t)));
-  if (tagged.length === 0) {
-    // Topics not set up (or API omitted them) — keep the committed snapshot
-    // rather than shipping an empty projects page.
-    console.warn(
-      `⚠ projects.json: no repos tagged ${[...CURATION_TOPICS].join(" / ")}; keeping committed snapshot`
-    );
-    return;
-  }
-
+function buildProjects(tagged) {
   const projects = tagged
     .map((r) => ({
       slug: r.name.toLowerCase(),
@@ -95,16 +83,31 @@ async function fetchGitHub() {
     listRepos(),
   ]);
 
-  buildProjects(own);
+  // Any curation topic is enough to list a repo, so tagging one of the
+  // narrower topics on its own still works: portfolio-featured implies
+  // featured, ai-lab implies the AI Lab listing, and both imply portfolio.
+  const tagged = own.filter((r) => (r.topics || []).some((t) => CURATION_TOPICS.has(t)));
+  if (tagged.length === 0) {
+    // Topics not set up (or the API omitted them). Both files are derived from
+    // the tagged set, so writing either one now would empty the projects page
+    // and the GitHub section; keep the committed snapshots instead.
+    console.warn(
+      `⚠ no repos tagged ${[...CURATION_TOPICS].join(" / ")}; keeping committed projects.json and github.json`
+    );
+    return;
+  }
 
-  // Everything below feeds the public "Live from GitHub" section — private
-  // repos are excluded since their links would 404 for visitors.
-  const pub = own.filter((r) => !r.private);
+  buildProjects(tagged);
+
+  // The "Live from GitHub" section covers the same curated set. Language share
+  // spans every tagged repo (it names none of them), while the repo list is
+  // public-only since a private repo's link would 404 for visitors.
+  const pub = tagged.filter((r) => !r.private);
 
   // Aggregate language share by repo size
   const langBytes = {};
   await Promise.all(
-    pub.map(async (r) => {
+    tagged.map(async (r) => {
       try {
         const langs = await getJson(r.languages_url);
         for (const [lang, bytes] of Object.entries(langs)) {

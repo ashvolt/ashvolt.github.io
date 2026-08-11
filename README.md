@@ -64,7 +64,10 @@ appear is controlled by **GitHub topics** on each repo (*repo page → About ⚙
 
 Any one of these is enough to list a repo, so the narrower topics work on their
 own: `portfolio-featured` alone still shows the repo everywhere a featured
-project belongs. A repo carrying none of them never appears.
+project belongs. A repo carrying none of them never appears anywhere on the
+site — the "Live from GitHub" language bar and repository list are built from
+the same tagged set, so untagged repos (the site repo, the profile README,
+old practice repos) stay off the page entirely.
 
 Everything on the card comes from GitHub: the repo **description**, remaining topics
 (rendered as badges), primary language, stars, last-push date, and the repo's
