@@ -65,7 +65,7 @@ export default function AiLabPage() {
       <div className="grid gap-5 md:grid-cols-2">
         {aiLabProjects.map((p, i) => (
           <SectionReveal key={p.slug} delay={i * 0.06}>
-            <ProjectCard project={p} detailed />
+            <ProjectCard project={p} />
           </SectionReveal>
         ))}
       </div>
