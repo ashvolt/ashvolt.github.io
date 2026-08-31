@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Mail, MapPin, Globe } from "lucide-react";
+import { Mail, MapPin, Globe, Linkedin } from "lucide-react";
 import { PageHeader } from "@/components/page-header";
 import { SectionReveal } from "@/components/section-reveal";
 import { profile } from "@/data/profile";
@@ -36,7 +36,15 @@ export default function ResumePage() {
             rel="noopener noreferrer"
             className="inline-flex items-center gap-1.5 hover:text-accent-400"
           >
-            <Globe className="h-4 w-4" aria-hidden /> LinkedIn
+            <Linkedin className="h-4 w-4" aria-hidden /> LinkedIn
+          </a>
+          <a
+            href={profile.siteUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 hover:text-accent-400"
+          >
+            <Globe className="h-4 w-4" aria-hidden /> {profile.siteUrl.replace(/^https?:\/\//, "")}
           </a>
         </div>
 
