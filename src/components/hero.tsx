@@ -2,6 +2,14 @@ import Link from "next/link";
 import { ArrowRight, Github, Linkedin, Mail } from "lucide-react";
 import { profile } from "@/data/profile";
 
+/** Concrete answers to what a US or EU hiring manager actually screens an
+ *  overseas candidate on: overlap hours, how to pay, and comms cadence. */
+const workingWithMe = [
+  "9:00am–2:00pm ET overlap, daily. Full overlap with EU.",
+  "USD via Wise, Payoneer, or Deel. W-8BEN ready.",
+  "Written standup daily",
+];
+
 /** Entrance animations are pure CSS (animate-fade-up + staggered delays) so the
  *  hero needs no client JS and respects prefers-reduced-motion via globals.css. */
 export function Hero() {
@@ -26,9 +34,34 @@ export function Hero() {
           </p>
         </div>
 
+        <div className="animate-fade-up mb-8 max-w-2xl" style={stagger(1)}>
+          <p className="text-base leading-relaxed sm:text-lg">
+            9+ years shipping production software — the last 4 remote for a US enterprise client
+            (Dell, via Turing), invoiced in USD, working US hours from India.
+          </p>
+          <p className="mt-2 text-base leading-relaxed text-muted sm:text-lg">
+            Angular · TypeScript · .NET Core · Node.js — now building the AI layer: RAG, agents,
+            tool-calling.
+          </p>
+
+          <div className="mt-5 rounded-2xl border bg-card p-5">
+            <h2 className="mb-3 text-sm font-semibold tracking-tight">
+              Working with me from anywhere
+            </h2>
+            <ul className="space-y-2">
+              {workingWithMe.map((item) => (
+                <li key={item} className="flex gap-2.5 text-sm leading-relaxed text-muted">
+                  <span aria-hidden className="mt-2 h-1 w-1 shrink-0 rounded-full bg-accent-500" />
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
         <h1
           className="animate-fade-up max-w-3xl text-4xl font-bold leading-tight tracking-tight sm:text-6xl"
-          style={stagger(1)}
+          style={stagger(2)}
         >
           {profile.headline}{" "}
           <span className="mt-2 block bg-gradient-to-r from-accent-400 to-accent-600 bg-clip-text text-transparent">
@@ -38,14 +71,14 @@ export function Hero() {
 
         <p
           className="animate-fade-up mt-6 max-w-2xl text-base leading-relaxed text-muted sm:text-lg"
-          style={stagger(2)}
+          style={stagger(3)}
         >
           {profile.tagline} 9+ years shipping enterprise platforms for companies like Dell
           Technologies — now applying that engineering depth to LLMs, agents, and
           retrieval-augmented systems.
         </p>
 
-        <div className="animate-fade-up mt-8 flex flex-wrap items-center gap-3" style={stagger(3)}>
+        <div className="animate-fade-up mt-8 flex flex-wrap items-center gap-3" style={stagger(4)}>
           <Link
             href="/projects"
             className="inline-flex items-center gap-2 rounded-xl bg-accent-600 px-5 py-2.5 text-sm font-medium text-white shadow-lg shadow-accent-600/25 transition-all hover:bg-accent-500 hover:shadow-accent-500/30"
@@ -88,7 +121,7 @@ export function Hero() {
           </div>
         </div>
 
-        <div className="animate-fade-up mt-14 flex flex-wrap gap-2" style={stagger(4)}>
+        <div className="animate-fade-up mt-14 flex flex-wrap gap-2" style={stagger(5)}>
           {profile.roles.map((role) => (
             <span
               key={role}

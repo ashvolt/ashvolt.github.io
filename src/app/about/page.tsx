@@ -45,7 +45,7 @@ export default function AboutPage() {
       </SectionReveal>
       <PageHeader
         eyebrow="About"
-        title="Nine years of shipping. Now building what's next."
+        title="9+ years of shipping. Now building what's next."
         lead="I'm Pragash — a full-stack engineer who has spent close to a decade turning ambiguous product problems into reliable software. Actively interviewing, and available to start immediately."
       />
 
@@ -78,7 +78,7 @@ export default function AboutPage() {
             AI. Since July I&apos;ve been building the systems instead of reading about them — a
             retrieval pipeline and agent loop from first principles, a spec-driven quant trading
             platform, time-series analytics in kdb+/q — while finishing my MBA. So I come into
-            this search with nine years of production discipline <em>and</em> hands-on AI systems
+            this search with 9+ years of production discipline <em>and</em> hands-on AI systems
             work, not one or the other.
           </p>
           <h2>The turn toward AI</h2>

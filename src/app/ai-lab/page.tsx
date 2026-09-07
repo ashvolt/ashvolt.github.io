@@ -75,7 +75,7 @@ export default function AiLabPage() {
           <h2 className="text-lg font-semibold">Why this matters</h2>
           <p className="mt-2 max-w-3xl text-sm leading-relaxed text-muted">
             Production AI systems fail in the plumbing: retrieval quality, context management,
-            latency, cost, observability. Nine years of building enterprise systems taught me to
+            latency, cost, observability. 9+ years of building enterprise systems taught me to
             engineer for those failure modes — the AI Lab is where I apply that discipline to
             LLM-based products. The goal isn&apos;t demos; it&apos;s understanding deep enough to
             ship AI features that survive real users.
