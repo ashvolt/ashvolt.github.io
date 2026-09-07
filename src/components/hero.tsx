@@ -36,7 +36,7 @@ export function Hero() {
 
         <div className="animate-fade-up mb-8 max-w-2xl" style={stagger(1)}>
           <p className="text-base leading-relaxed sm:text-lg">
-            9 years shipping production software — the last 4 remote for a US enterprise client
+            9+ years shipping production software — the last 4 remote for a US enterprise client
             (Dell, via Turing), invoiced in USD, working US hours from India.
           </p>
           <p className="mt-2 text-base leading-relaxed text-muted sm:text-lg">
