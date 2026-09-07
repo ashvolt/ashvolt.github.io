@@ -22,7 +22,7 @@ export function Hero() {
           />
           <p className="inline-flex items-center gap-2 rounded-full border bg-card px-3 py-1 font-mono text-xs text-muted">
             <span aria-hidden className="h-1.5 w-1.5 animate-pulse rounded-full bg-emerald-500" />
-            Available for remote &amp; AI engineering roles
+            {profile.availabilityStatus}
           </p>
         </div>
 

@@ -9,7 +9,7 @@ export const profile = {
     "Building AI-powered products with full-stack engineering, LLMs, agents, and modern web technologies.",
   summary:
     "Full-stack engineer with 9+ years delivering scalable web platforms, SaaS products, and microservice APIs — now building at the intersection of product engineering and applied AI.",
-  location: "Puducherry, India",
+  location: "India · Remote worldwide",
   email: "pragashvenkat@gmail.com",
   siteUrl: "https://ashvolt.github.io",
   links: {
@@ -17,7 +17,14 @@ export const profile = {
     linkedin: "https://www.linkedin.com/in/pragash-mouttoucoumarassamy/",
     credly: "https://www.credly.com/users/pragash-mouttoucoumarassamy",
   },
-  availability: ["Open to Remote", "Open to UAE", "Open to AI roles"],
+  availabilityStatus: "Actively interviewing — available to start immediately",
+  availability: [
+    "Actively interviewing",
+    "Available immediately",
+    "Remote worldwide",
+    "Open to UAE relocation",
+    "AI & full-stack engineering roles",
+  ],
   roles: [
     "Full-Stack Engineer",
     "AI Engineer",

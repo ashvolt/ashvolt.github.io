@@ -17,7 +17,12 @@ const personJsonLd = {
   url: profile.siteUrl,
   email: `mailto:${profile.email}`,
   jobTitle: profile.headline,
-  address: { "@type": "PostalAddress", addressLocality: "Puducherry", addressCountry: "IN" },
+  address: { "@type": "PostalAddress", addressCountry: "IN" },
+  seeks: {
+    "@type": "Demand",
+    name: "Senior full-stack / AI engineering role (remote worldwide)",
+    availability: "https://schema.org/InStock",
+  },
   sameAs: [profile.links.github, profile.links.linkedin, profile.links.credly],
   knowsAbout: ["TypeScript", "React", "Angular", "Node.js", ".NET Core", "AI Engineering", "LLMs", "RAG", "Microservices"],
 };
