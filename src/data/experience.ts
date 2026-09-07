@@ -13,7 +13,7 @@ export const experience: Experience[] = [
   {
     company: "Dell Technologies (Contractor via Turing)",
     role: "Senior Software Consultant",
-    period: "Jul 2022 — Present",
+    period: "Jul 2022 — Jul 2026",
     location: "Remote",
     summary:
       "Full-stack engineering across micro frontends and backend microservices for enterprise platforms, in a fully remote, async-first team.",
@@ -42,7 +42,7 @@ export const experience: Experience[] = [
     company: "RexEMR Pvt. Ltd",
     role: "Software Engineer — UI/UX",
     period: "Jun 2021 — Jul 2022",
-    location: "Puducherry, India",
+    location: "India (Remote)",
     summary:
       "Led end-to-end development of an EMR SaaS platform for clinicians — from reusable component library to payment-critical insurance workflows.",
     impact: [
@@ -60,7 +60,7 @@ export const experience: Experience[] = [
     company: "Relevantz Technology Services",
     role: "Software Engineer",
     period: "Jun 2017 — Jun 2021",
-    location: "Puducherry, India",
+    location: "India (Remote)",
     summary:
       "Delivered features for a high-traffic bidding and EMI payments platform, and led a legacy AngularJS-to-Angular migration.",
     impact: [
@@ -79,12 +79,12 @@ export const experience: Experience[] = [
 export const education = [
   {
     degree: "Master of Business Management",
-    school: "Pondicherry University, Puducherry, India",
+    school: "Pondicherry University, India",
     year: "2026",
   },
   {
     degree: "B.Tech — Information Technology",
-    school: "Pondicherry University, Puducherry, India",
+    school: "Pondicherry University, India",
     year: "2017",
   },
 ];

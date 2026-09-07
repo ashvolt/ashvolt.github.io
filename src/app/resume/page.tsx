@@ -28,7 +28,7 @@ export default function ResumePage() {
             <Mail className="h-4 w-4" aria-hidden /> {profile.email}
           </a>
           <span className="inline-flex items-center gap-1.5">
-            <MapPin className="h-4 w-4" aria-hidden /> {profile.location} · Open to remote
+            <MapPin className="h-4 w-4" aria-hidden /> {profile.location}
           </span>
           <a
             href={profile.links.linkedin}
@@ -39,6 +39,11 @@ export default function ResumePage() {
             <Globe className="h-4 w-4" aria-hidden /> LinkedIn
           </a>
         </div>
+
+        <p className="mb-6 inline-flex items-center gap-2 rounded-xl border border-emerald-500/30 bg-emerald-500/10 px-4 py-2 text-sm font-medium text-emerald-500">
+          <span aria-hidden className="h-1.5 w-1.5 animate-pulse rounded-full bg-emerald-500" />
+          {profile.availabilityStatus}
+        </p>
 
         <a
           href={`mailto:${profile.email}?subject=Resume%20request%20—%20${encodeURIComponent(profile.fullName)}`}
@@ -61,7 +66,10 @@ export default function ResumePage() {
             and payment &amp; billing workflows. Comfortable working autonomously in small remote
             teams, leveraging AI tools to ship fast and maintain quality. Proven track record
             across enterprise SaaS, commerce-adjacent platforms, and high-availability
-            microservices.
+            microservices. Most recently a senior consultant at Dell Technologies through
+            July 2026; since then building applied-AI systems full time — retrieval
+            pipelines, agent loops, and a spec-driven quant platform — and actively
+            interviewing for senior full-stack and AI engineering roles.
           </p>
         </section>
       </SectionReveal>

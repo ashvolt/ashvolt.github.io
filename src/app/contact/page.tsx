@@ -7,7 +7,7 @@ import { profile } from "@/data/profile";
 export const metadata: Metadata = {
   title: "Contact",
   description:
-    "Get in touch with Pragash Mouttoucoumarassamy — open to remote, UAE, and AI engineering roles.",
+    "Get in touch with Pragash Mouttoucoumarassamy — actively interviewing and available immediately for senior full-stack and AI engineering roles, remote worldwide or UAE.",
   alternates: { canonical: "/contact/" },
 };
 
@@ -48,7 +48,7 @@ export default function ContactPage() {
       <PageHeader
         eyebrow="Contact"
         title="Let's talk"
-        lead="Hiring for a senior full-stack, AI engineer, or founding engineer role? I'd love to hear what you're building."
+        lead="Hiring for a senior full-stack, AI engineer, or founding engineer role? I'm actively interviewing and can start immediately — I'd love to hear what you're building."
       />
 
       <SectionReveal>

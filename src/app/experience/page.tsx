@@ -4,11 +4,12 @@ import { PageHeader } from "@/components/page-header";
 import { Timeline } from "@/components/timeline";
 import { SectionReveal } from "@/components/section-reveal";
 import { experience, education } from "@/data/experience";
+import { profile } from "@/data/profile";
 
 export const metadata: Metadata = {
   title: "Experience",
   description:
-    "9+ years of professional experience: Dell Technologies, RexEMR, and Relevantz — enterprise micro frontends, healthcare SaaS, and payments platforms.",
+    "9+ years of professional experience: Dell Technologies (through July 2026), RexEMR, and Relevantz — enterprise micro frontends, healthcare SaaS, and payments platforms. Actively interviewing.",
   alternates: { canonical: "/experience/" },
 };
 
@@ -20,6 +21,21 @@ export default function ExperiencePage() {
         title="Track record"
         lead="Every role framed the same way I frame engineering: what changed for the business, not what tasks were done."
       />
+
+      <SectionReveal>
+        <div className="mb-8 rounded-2xl border border-emerald-500/30 bg-emerald-500/10 p-5">
+          <p className="mb-1 flex items-center gap-2 font-semibold text-emerald-500">
+            <span aria-hidden className="h-2 w-2 animate-pulse rounded-full bg-emerald-500" />
+            {profile.availabilityStatus}
+          </p>
+          <p className="text-sm leading-relaxed text-muted">
+            My Dell Technologies engagement closed in July 2026. Since then I&apos;ve been
+            building applied-AI systems full time — retrieval pipelines, agent loops, and a
+            spec-driven quant platform — and I&apos;m looking for a senior full-stack or AI
+            engineering role, remote worldwide or UAE.
+          </p>
+        </div>
+      </SectionReveal>
 
       <Timeline items={experience} />
 

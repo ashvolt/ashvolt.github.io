@@ -7,7 +7,7 @@ import { SectionReveal } from "@/components/section-reveal";
 export const metadata: Metadata = {
   title: "About",
   description:
-    "The story of Pragash Mouttoucoumarassamy — from enterprise SaaS engineering in Puducherry to building AI-powered products with LLMs and agents.",
+    "The story of Pragash Mouttoucoumarassamy — from enterprise SaaS engineering to building AI-powered products with LLMs and agents. Actively interviewing for senior full-stack and AI engineering roles.",
   alternates: { canonical: "/about/" },
 };
 
@@ -46,7 +46,7 @@ export default function AboutPage() {
       <PageHeader
         eyebrow="About"
         title="Nine years of shipping. Now building what's next."
-        lead="I'm Pragash — a full-stack engineer from Puducherry, India, who has spent close to a decade turning ambiguous product problems into reliable software."
+        lead="I'm Pragash — a full-stack engineer who has spent close to a decade turning ambiguous product problems into reliable software. Actively interviewing, and available to start immediately."
       />
 
       <SectionReveal>
@@ -66,11 +66,20 @@ export default function AboutPage() {
             that no tutorial can.
           </p>
           <p>
-            Since 2022 I&apos;ve worked with Dell Technologies (through Turing) as a senior
-            consultant: micro frontends aligned to enterprise design systems, .NET Core and
-            Node.js microservices behind an Ocelot API gateway, real-time systems on SignalR
+            From 2022 through July 2026 I worked with Dell Technologies (through Turing) as a
+            senior consultant: micro frontends aligned to enterprise design systems, .NET Core
+            and Node.js microservices behind an Ocelot API gateway, real-time systems on SignalR
             sustaining ~1,200 concurrent users. Fully remote, fully async, across time zones —
             which is where I learned that written communication is an engineering skill.
+          </p>
+          <p>
+            That engagement wrapped in July 2026, and I made a deliberate choice about what came
+            next: rather than taking the first available contract, I went full time into applied
+            AI. Since July I&apos;ve been building the systems instead of reading about them — a
+            retrieval pipeline and agent loop from first principles, a spec-driven quant trading
+            platform, time-series analytics in kdb+/q — while finishing my MBA. So I come into
+            this search with nine years of production discipline <em>and</em> hands-on AI systems
+            work, not one or the other.
           </p>
           <h2>The turn toward AI</h2>
           <p>
@@ -85,6 +94,15 @@ export default function AboutPage() {
             production engineering discipline — observability, API design, failure handling —
             with a real understanding of how LLM systems behave. That intersection is exactly
             where I&apos;m building.
+          </p>
+          <h2>What I&apos;m looking for</h2>
+          <p>
+            I&apos;m actively interviewing and available to start immediately. The fit I want: a
+            senior full-stack, AI, or founding engineer role on a product-driven, remote-first
+            team where I own real surface area — ideally somewhere LLM and retrieval systems are
+            part of the product, not a side experiment. Remote worldwide, and open to relocating
+            to the UAE. If that sounds like your team,{" "}
+            <Link href="/contact">get in touch</Link> — I reply within a day.
           </p>
         </div>
       </SectionReveal>
